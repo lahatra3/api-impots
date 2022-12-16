@@ -7,6 +7,6 @@ export declare class PersonnesService {
     create(donnees: CreatePersonneDto): Promise<void>;
     findall(): Promise<Personnes[]>;
     findone(personne_id: number): Promise<Personnes>;
-    update(donnees: UpdatePersonnesDto, personne_id: number): Promise<void>;
-    updatePassword(donnees: UpdatePasswordPersonneDto, personne_id: number): Promise<void>;
+    update(donnees: UpdatePersonnesDto): Promise<void>;
+    updatePassword(donnees: UpdatePasswordPersonneDto): Promise<void>;
 }

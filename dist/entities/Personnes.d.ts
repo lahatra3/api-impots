@@ -1,6 +1,5 @@
 import { Paiements } from "./Paiements";
 import { Notifications } from "./Notifications";
-import { Habilitations } from "./Habilitations";
 export declare class Personnes {
     id: number;
     nom: string;
@@ -21,5 +20,4 @@ export declare class Personnes {
     fonction: string;
     paiements: Paiements[];
     notifications: Notifications[];
-    habilitations: Habilitations[];
 }

@@ -4,7 +4,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { PersonnesModule } from './personnes/personnes.module';
 import { AdminModule } from './admin/admin.module';
-import { HabilitationsModule } from './habilitations/habilitations.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { PaiementsModule } from './paiements/paiements.module';
 
@@ -27,7 +26,6 @@ import { PaiementsModule } from './paiements/paiements.module';
     AuthModule,
     PersonnesModule,
     AdminModule,
-    HabilitationsModule,
     NotificationsModule,
     PaiementsModule
   ]

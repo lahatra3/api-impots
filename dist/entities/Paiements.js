@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Paiements = void 0;
 const typeorm_1 = require("typeorm");
-const Habilitations_1 = require("./Habilitations");
 const Personnes_1 = require("./Personnes");
 const StatusPaiements_1 = require("./StatusPaiements");
 let Paiements = class Paiements {
@@ -45,17 +44,13 @@ __decorate([
     __metadata("design:type", Date)
 ], Paiements.prototype, "updatedAt", void 0);
 __decorate([
-    (0, typeorm_1.Column)("int", { name: "status_id" }),
+    (0, typeorm_1.Column)("int", { name: "status_id", default: 1 }),
     __metadata("design:type", Number)
 ], Paiements.prototype, "statusId", void 0);
 __decorate([
     (0, typeorm_1.Column)("int", { name: "personne_id" }),
     __metadata("design:type", Number)
 ], Paiements.prototype, "personneId", void 0);
-__decorate([
-    (0, typeorm_1.Column)("int", { name: "habilitation_id" }),
-    __metadata("design:type", Number)
-], Paiements.prototype, "habilitationId", void 0);
 __decorate([
     (0, typeorm_1.Column)("datetime", { name: "date_paye", nullable: true }),
     __metadata("design:type", Date)
@@ -68,14 +63,6 @@ __decorate([
     (0, typeorm_1.Column)("int", { name: "admin_id_paye", nullable: true }),
     __metadata("design:type", Number)
 ], Paiements.prototype, "adminIdPaye", void 0);
-__decorate([
-    (0, typeorm_1.ManyToOne)(() => Habilitations_1.Habilitations, (habilitations) => habilitations.paiements, {
-        onDelete: "RESTRICT",
-        onUpdate: "RESTRICT",
-    }),
-    (0, typeorm_1.JoinColumn)([{ name: "habilitation_id", referencedColumnName: "id" }]),
-    __metadata("design:type", Habilitations_1.Habilitations)
-], Paiements.prototype, "habilitation", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)(() => Personnes_1.Personnes, (personnes) => personnes.paiements, {
         onDelete: "RESTRICT",
@@ -92,7 +79,6 @@ __decorate([
 Paiements = __decorate([
     (0, typeorm_1.Index)("fk_status_id_paiements", ["statusId"], {}),
     (0, typeorm_1.Index)("fk_personne_id_paiements", ["personneId"], {}),
-    (0, typeorm_1.Index)("fk_habilitation_id_paiements", ["habilitationId"], {}),
     (0, typeorm_1.Entity)("paiements", { schema: "IMPOTS" })
 ], Paiements);
 exports.Paiements = Paiements;

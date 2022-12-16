@@ -34,18 +34,19 @@ let PersonnesController = class PersonnesController {
             throw new common_1.NotAcceptableException('Credentials incorrects!');
         return await this.personnesService.findone(donnees.id);
     }
-    async findPersonneByToken(req) {
-        return await this.personnesService.findone(+req.user.id);
-    }
     async updatePersonne(donnees, req) {
+        if (req.user.id !== 'admin')
+            throw new common_1.UnauthorizedException('Credentials incorrects!');
         if (!donnees)
             throw new common_1.NotAcceptableException('Credentials incorrects!');
-        return await this.personnesService.update(donnees, +req.user.id);
+        return await this.personnesService.update(donnees);
     }
     async updatePasswordPersonne(donnees, req) {
+        if (req.user.id !== 'admin')
+            throw new common_1.UnauthorizedException('Credentials incorrects!');
         if (!donnees)
             throw new common_1.NotAcceptableException('Credentials incorrects!');
-        return await this.personnesService.updatePassword(donnees, +req.user.id);
+        return await this.personnesService.updatePassword(donnees);
     }
 };
 __decorate([
@@ -68,14 +69,6 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], PersonnesController.prototype, "findPersonneById", null);
-__decorate([
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwtImpots')),
-    (0, common_1.Get)(''),
-    __param(0, (0, common_1.Request)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], PersonnesController.prototype, "findPersonneByToken", null);
 __decorate([
     (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwtImpots')),
     (0, common_1.Put)('update'),

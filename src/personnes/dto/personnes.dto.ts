@@ -14,6 +14,7 @@ export class CreatePersonneDto {
 }
 
 export class UpdatePersonnesDto {
+    personne_id: number;
     adresse: string;
     tel1: string;
     tel2?: string | null;
@@ -21,6 +22,7 @@ export class UpdatePersonnesDto {
 }
 
 export class UpdatePasswordPersonneDto {
+    personne_id: number;
     last_password: string;
     new_password: string;
 }

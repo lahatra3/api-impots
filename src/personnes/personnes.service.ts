@@ -21,6 +21,7 @@ export class PersonnesService {
             nom: donnees.nom,
             prenoms: donnees.prenoms,
             dateNaissance: donnees.date_naissance,
+            lieuNaissance: donnees.lieu_naissance,
             cin: donnees.cin,
             dateCin: donnees.date_cin,
             lieuCin: donnees.lieu_cin,
@@ -62,7 +63,7 @@ export class PersonnesService {
         .getRawOne();
     }
 
-    async update(donnees: UpdatePersonnesDto, personne_id: number): Promise<void> {
+    async update(donnees: UpdatePersonnesDto): Promise<void> {
         await this.personnesRepository
         .createQueryBuilder()
         .update(Personnes)
@@ -73,16 +74,16 @@ export class PersonnesService {
             email: donnees.email,
             updatedAt: () => "NOW()"
         })
-        .where(`id=:identifiant`, {identifiant: personne_id})
+        .where(`id=:identifiant`, {identifiant: donnees.personne_id})
         .execute();
     }
 
-    async updatePassword(donnees: UpdatePasswordPersonneDto, personne_id: number): Promise<void> {
+    async updatePassword(donnees: UpdatePasswordPersonneDto): Promise<void> {
         const verify: Personnes = await this.personnesRepository
         .createQueryBuilder('p')
         .select(['True'])
         .where(`p.id=:identifiant AND p.password=SHA2(:password, 256)`, {
-            identifiant: personne_id,
+            identifiant: donnees.personne_id,
             password: donnees.last_password
         })
         .getRawOne();
@@ -94,7 +95,7 @@ export class PersonnesService {
             password: () => "SHA2('"+donnees.new_password+"', 256)",
             updatedAt: () => "NOW()"
         })
-        .where(`id=:identifiant`, {identifiant: personne_id})
+        .where(`id=:identifiant`, {identifiant: donnees.personne_id})
         .execute();
     }
 }

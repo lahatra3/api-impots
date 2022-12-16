@@ -1,7 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Paiements } from "./Paiements";
 import { Notifications } from "./Notifications";
-import { Habilitations } from "./Habilitations";
 
 @Entity("personnes", { schema: "IMPOTS" })
 export class Personnes {
@@ -26,7 +25,7 @@ export class Personnes {
   @Column("date", { name: "date_cin" })
   dateCin: string;
 
-  @Column("date", { name: "lieu_cin" })
+  @Column("varchar", { name: "lieu_cin", length: 255 })
   lieuCin: string;
 
   @Column("varchar", { name: "adresse", length: 255 })
@@ -69,7 +68,4 @@ export class Personnes {
 
   @OneToMany(() => Notifications, (notifications) => notifications.personne)
   notifications: Notifications[];
-
-  @OneToMany(() => Habilitations, (habilitations) => habilitations.personne)
-  habilitations: Habilitations[];
 }

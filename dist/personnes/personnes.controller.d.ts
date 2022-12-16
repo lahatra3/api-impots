@@ -8,7 +8,6 @@ export declare class PersonnesController {
     findPersonneById(donnees: {
         id: number;
     }): Promise<import("../entities/Personnes").Personnes>;
-    findPersonneByToken(req: any): Promise<import("../entities/Personnes").Personnes>;
     updatePersonne(donnees: UpdatePersonnesDto, req: any): Promise<void>;
     updatePasswordPersonne(donnees: UpdatePasswordPersonneDto, req: any): Promise<void>;
 }

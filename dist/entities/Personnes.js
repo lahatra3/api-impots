@@ -13,7 +13,6 @@ exports.Personnes = void 0;
 const typeorm_1 = require("typeorm");
 const Paiements_1 = require("./Paiements");
 const Notifications_1 = require("./Notifications");
-const Habilitations_1 = require("./Habilitations");
 let Personnes = class Personnes {
 };
 __decorate([
@@ -45,7 +44,7 @@ __decorate([
     __metadata("design:type", String)
 ], Personnes.prototype, "dateCin", void 0);
 __decorate([
-    (0, typeorm_1.Column)("date", { name: "lieu_cin" }),
+    (0, typeorm_1.Column)("varchar", { name: "lieu_cin", length: 255 }),
     __metadata("design:type", String)
 ], Personnes.prototype, "lieuCin", void 0);
 __decorate([
@@ -100,10 +99,6 @@ __decorate([
     (0, typeorm_1.OneToMany)(() => Notifications_1.Notifications, (notifications) => notifications.personne),
     __metadata("design:type", Array)
 ], Personnes.prototype, "notifications", void 0);
-__decorate([
-    (0, typeorm_1.OneToMany)(() => Habilitations_1.Habilitations, (habilitations) => habilitations.personne),
-    __metadata("design:type", Array)
-], Personnes.prototype, "habilitations", void 0);
 Personnes = __decorate([
     (0, typeorm_1.Entity)("personnes", { schema: "IMPOTS" })
 ], Personnes);

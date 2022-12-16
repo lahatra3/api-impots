@@ -6,13 +6,11 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Habilitations } from "./Habilitations";
 import { Personnes } from "./Personnes";
 import { StatusPaiements } from "./StatusPaiements";
 
 @Index("fk_status_id_paiements", ["statusId"], {})
 @Index("fk_personne_id_paiements", ["personneId"], {})
-@Index("fk_habilitation_id_paiements", ["habilitationId"], {})
 @Entity("paiements", { schema: "IMPOTS" })
 export class Paiements {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
@@ -37,14 +35,11 @@ export class Paiements {
   @Column("datetime", { name: "updated_at", nullable: true })
   updatedAt: Date | null;
 
-  @Column("int", { name: "status_id" })
+  @Column("int", { name: "status_id", default: 1 })
   statusId: number;
 
   @Column("int", { name: "personne_id" })
   personneId: number;
-
-  @Column("int", { name: "habilitation_id" })
-  habilitationId: number;
 
   @Column("datetime", { name: "date_paye", nullable: true })
   datePaye: Date | null;
@@ -54,13 +49,6 @@ export class Paiements {
 
   @Column("int", { name: "admin_id_paye", nullable: true })
   adminIdPaye: number | null;
-
-  @ManyToOne(() => Habilitations, (habilitations) => habilitations.paiements, {
-    onDelete: "RESTRICT",
-    onUpdate: "RESTRICT",
-  })
-  @JoinColumn([{ name: "habilitation_id", referencedColumnName: "id" }])
-  habilitation: Habilitations;
 
   @ManyToOne(() => Personnes, (personnes) => personnes.paiements, {
     onDelete: "RESTRICT",

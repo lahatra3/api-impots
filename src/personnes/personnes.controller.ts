@@ -1,5 +1,5 @@
 import { Body, Controller, Get, NotAcceptableException, 
-    Param, Patch, Post, Put, Request, UseGuards } from '@nestjs/common';
+    Param, Patch, Post, Put, Request, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { CreatePersonneDto, UpdatePasswordPersonneDto, UpdatePersonnesDto } from './dto/personnes.dto';
 import { PersonnesService } from './personnes.service';
@@ -28,22 +28,18 @@ export class PersonnesController {
     }
 
     @UseGuards(AuthGuard('jwtImpots'))
-    @Get('')
-    async findPersonneByToken(@Request() req: any) {
-        return await this.personnesService.findone(+req.user.id);
-    }
-
-    @UseGuards(AuthGuard('jwtImpots'))
     @Put('update')
     async updatePersonne(@Body() donnees: UpdatePersonnesDto, @Request() req: any) {
+        if(req.user.id !== 'admin') throw new UnauthorizedException('Credentials incorrects!');
         if(!donnees) throw new NotAcceptableException('Credentials incorrects!');
-        return await this.personnesService.update(donnees, +req.user.id);
+        return await this.personnesService.update(donnees);
     }
 
     @UseGuards(AuthGuard('jwtImpots'))
     @Patch('update-password')
     async updatePasswordPersonne(@Body() donnees: UpdatePasswordPersonneDto, @Request() req: any) {
+        if(req.user.id !== 'admin') throw new UnauthorizedException('Credentials incorrects!');
         if(!donnees) throw new NotAcceptableException('Credentials incorrects!');
-        return await this.personnesService.updatePassword(donnees, +req.user.id);
+        return await this.personnesService.updatePassword(donnees);
     }
 }

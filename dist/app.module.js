@@ -13,7 +13,6 @@ const typeorm_1 = require("@nestjs/typeorm");
 const auth_module_1 = require("./auth/auth.module");
 const personnes_module_1 = require("./personnes/personnes.module");
 const admin_module_1 = require("./admin/admin.module");
-const habilitations_module_1 = require("./habilitations/habilitations.module");
 const notifications_module_1 = require("./notifications/notifications.module");
 const paiements_module_1 = require("./paiements/paiements.module");
 let AppModule = class AppModule {
@@ -38,7 +37,6 @@ AppModule = __decorate([
             auth_module_1.AuthModule,
             personnes_module_1.PersonnesModule,
             admin_module_1.AdminModule,
-            habilitations_module_1.HabilitationsModule,
             notifications_module_1.NotificationsModule,
             paiements_module_1.PaiementsModule
         ]

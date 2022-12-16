@@ -59,7 +59,7 @@ export class Personnes {
   @Column("varchar", {
     name: "fonction",
     length: 255,
-    default: "users",
+    default: "user",
   })
   fonction: string;
 

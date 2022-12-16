@@ -87,7 +87,7 @@ __decorate([
     (0, typeorm_1.Column)("varchar", {
         name: "fonction",
         length: 255,
-        default: "users",
+        default: "user",
     }),
     __metadata("design:type", String)
 ], Personnes.prototype, "fonction", void 0);

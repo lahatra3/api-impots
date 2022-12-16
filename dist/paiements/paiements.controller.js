@@ -22,11 +22,16 @@ let PaiementsController = class PaiementsController {
         this.paiementService = paiementService;
     }
     async createPaiement(donnees, req) {
-        if (req.user.id !== 'users')
+        if (req.user.id !== 'user')
             throw new common_1.UnauthorizedException('Credentials incorrects!');
         if (!donnees)
             throw new common_1.NotAcceptableException('Credentials incorrects!');
         return await this.paiementService.create(donnees);
+    }
+    async findallPaiements(req) {
+        if (req.user.id !== 'admin') {
+        }
+        return await this.paiementService.findall();
     }
 };
 __decorate([
@@ -38,6 +43,14 @@ __decorate([
     __metadata("design:paramtypes", [paiements_dto_1.CreatePaiementsDto, Object]),
     __metadata("design:returntype", Promise)
 ], PaiementsController.prototype, "createPaiement", null);
+__decorate([
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('jwtImpots')),
+    (0, common_1.Get)('all'),
+    __param(0, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], PaiementsController.prototype, "findallPaiements", null);
 PaiementsController = __decorate([
     (0, common_1.Controller)('paiements'),
     __metadata("design:paramtypes", [paiements_service_1.PaiementsService])
